@@ -58,7 +58,9 @@ function Header() {
                 <span className="text-muted-foreground font-bold text-xs">
                   Have a nice day!
                 </span>
-                <span className="font-bold">Dr. Prachi Jangid</span>
+                <span className="font-inter font-semibold text-base">
+                  Dr. Prachi Jangid
+                </span>
               </div>
             </div>
             <div className="">
