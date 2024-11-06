@@ -12,14 +12,32 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import {
+  createSerializer,
+  parseAsIsoDate,
+  useQueryState,
+  useQueryStates,
+} from "nuqs";
 
 export function DatePickerWithRange({
   className,
 }: React.HTMLAttributes<HTMLDivElement>) {
-  const [date, setDate] = React.useState<DateRange | undefined>({
-    from: undefined,
-    to: undefined,
-  });
+  const [date, setDate] = useQueryStates(
+    {
+      from: parseAsIsoDate.withDefault(new Date()),
+      to: parseAsIsoDate.withDefault(new Date()),
+    },
+    {
+      history: "push",
+    }
+  );
+
+  // const { lat, lng } = coordinates
+
+  // const [date, setDate] = React.useState<DateRange | undefined>({
+  //   from: undefined,
+  //   to: undefined,
+  // });
 
   return (
     <div className={cn("grid gap-2", className)}>
@@ -52,13 +70,27 @@ export function DatePickerWithRange({
           <Calendar
             initialFocus
             mode="range"
-            defaultMonth={date?.from}
-            selected={date}
-            onSelect={setDate}
+            defaultMonth={date?.from ?? undefined}
+            selected={{
+              from: date.from ?? undefined,
+              to: date.to ?? undefined,
+            }}
+            onSelect={async (e) => {
+              // setDate(e);
+              await setDate({
+                from: e?.from,
+                to: e?.to,
+              });
+            }}
             numberOfMonths={1}
             footer={
               <Button
-                onClick={() => setDate(undefined)}
+                onClick={() =>
+                  setDate({
+                    from: undefined,
+                    to: undefined,
+                  })
+                }
                 variant="default"
                 className="w-full hover:bg-transparent hover:text-primary border hover:border-primary transition-all duration-500"
               >

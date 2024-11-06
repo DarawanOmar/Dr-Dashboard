@@ -5,19 +5,16 @@ import { Ellipsis } from "lucide-react";
 import { PaginationTable } from "./_components/pagination";
 import DataTable from "./_components/table/table";
 import { cn } from "@/lib/utils";
+import { SearchParams } from "nuqs";
+import { searchParamsCache } from "./_type";
 
 export type PropsAppointmenrPage = {
-  searchParams: {
-    date: string;
-    time: string;
-    selected: string;
-    show: string;
-    open: string;
-  };
+  searchParams: SearchParams;
 };
 
 function AppointmentMannagmenet({ searchParams }: PropsAppointmenrPage) {
-  const selected = searchParams.selected || "new";
+  const { selected } = searchParamsCache.parse(searchParams);
+
   return (
     <div className="">
       <div className="flex justify-between items-center m-7 ">
