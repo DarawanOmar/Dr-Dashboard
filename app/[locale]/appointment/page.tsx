@@ -12,7 +12,7 @@ export type PropsAppointmenrPage = {
   searchParams: SearchParams;
 };
 
-function AppointmentMannagmenet({ searchParams }: PropsAppointmenrPage) {
+async function AppointmentMannagmenet({ searchParams }: PropsAppointmenrPage) {
   const { selected } = searchParamsCache.parse(searchParams);
 
   return (

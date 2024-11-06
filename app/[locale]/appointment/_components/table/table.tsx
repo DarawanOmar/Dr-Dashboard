@@ -20,9 +20,10 @@ import { Button } from "@/components/ui/button";
 import { DialogClose } from "@/components/ui/dialog";
 import CustomDialogWithTrigger from "@/components/reusable/custom-dialog-with-trigger";
 import { AlretIcon, Detail, Details } from "@/public/icons";
+import { searchParamsCache } from "../../_type";
 
 function DataTable({ searchParams }: { searchParams: PropsAppointmenrPage }) {
-  const selected = searchParams.searchParams.selected || "new";
+  const { selected } = searchParamsCache.parse(searchParams.searchParams);
   const tableHead = [
     "",
     "Patient Name",
